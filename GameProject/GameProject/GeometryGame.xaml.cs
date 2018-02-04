@@ -16,17 +16,16 @@ using System.Windows.Shapes;
 namespace GameProject
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GeometryGame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    
+    public partial class GeometryGame : Page
     {
-        Menu menu;
-        public MainWindow()
+        private Frame mainFrame;
+        public GeometryGame(Frame frame)
         {
             InitializeComponent();
-            menu = new Menu(mainFrame);
-            this.mainFrame.Content= menu;
-
+            mainFrame = frame;
         }
     }
 }
