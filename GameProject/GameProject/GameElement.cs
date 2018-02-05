@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GameProject
 {
     class GameElement
     {
         private Point location;
-        protected double height;
-        protected double width;
+        private double height;
+        private double width;
 
 
         public Point Location
@@ -29,6 +30,15 @@ namespace GameProject
             set { shape = value; }
         }
 
+        public bool IsClicked { get; set; }
+        public double Height { get => height; set => height = value; }
+        public double Width { get => width; set => width = value; }
+
+        public GameElement()
+        {
+            IsClicked = false;
+        }
+
         public Geometry GetTransformedGeometry()
         {
             Geometry copy = shape.Clone();
@@ -43,17 +53,18 @@ namespace GameProject
     {
         public Circle(double height, double width)
         {
-            this.height = height;
-            this.width = width;
+            this.Height = height;
+            this.Width = width;
             Shape = new EllipseGeometry(new Rect(0, 0, width, height));
+            
         }
     }
     class Rectangle : GameElement
     {
         public Rectangle(double height, double width)
         {
-            this.height = height;
-            this.width = width;
+            this.Height = height;
+            this.Width = width;
             Shape = new RectangleGeometry(new Rect(0, 0, width, height));
         }
     }
@@ -61,12 +72,31 @@ namespace GameProject
     {
         public Cross(double height, double width)
         {
-            this.height = height;
-            this.width = width;
+            this.Height = height;
+            this.Width = width;
             GeometryGroup group = new GeometryGroup();
             group.Children.Add(new LineGeometry(Location, new Point(Location.X + width, Location.Y + height)));
             group.Children.Add(new LineGeometry(new Point(Location.X, Location.Y + height), new Point(Location.X + width, Location.Y)));
             Shape = group;
+        }
+    }
+    class Triangle:GameElement
+    {
+        public Triangle(double height, double width)
+        {
+            this.Height = height;
+            this.Width = width;
+
+            PathGeometry pathGeometry = new PathGeometry();
+            PathFigure figure = new PathFigure();
+            figure.StartPoint = new Point(Location.X + width / 2, Location.Y);
+            PathSegmentCollection segmentCollection = new PathSegmentCollection();
+            segmentCollection.Add(new LineSegment() { Point = new Point(Location.X, Location.Y + height) });
+            segmentCollection.Add(new LineSegment() { Point = new Point(Location.X + width, Location.Y + height) });
+            figure.Segments = segmentCollection;
+            figure.IsClosed = true;
+            pathGeometry.Figures.Add(figure);
+            Shape = pathGeometry;
         }
     }
 }
