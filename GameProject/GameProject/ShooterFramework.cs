@@ -71,28 +71,32 @@ namespace GameProject
             {
                 base.OnRender(drawingContext);
 
+                RectangleGeometry background = new RectangleGeometry(new Rect(0, 160, screenWidth, 110));
+                drawingContext.DrawGeometry(Brushes.LightGray, null, background);
+
                 for (int i = 0; i < shooter.ObjectList.Count; i++)
                 {
                     if (shooter.ObjectList[i] is Cross)
                     {
-                        drawingContext.DrawGeometry(Brushes.Azure, new Pen(Brushes.Black, 25), shooter.ObjectList[i].GetTransformedGeometry());
+                        drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 25), shooter.ObjectList[i].GetTransformedGeometry());
                     }
                     else
                     {
-                        drawingContext.DrawGeometry(Brushes.Azure, new Pen(Brushes.Black, 4), shooter.ObjectList[i].GetTransformedGeometry());
+                        drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 4), shooter.ObjectList[i].GetTransformedGeometry());
                     }
 
 
                 }
                 if (shooter.ChoosenElement is Cross)
                 {
-                    drawingContext.DrawGeometry(Brushes.Azure, new Pen(Brushes.Black, 25), shooter.ChoosenElement.GetTransformedGeometry());
+                    drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 25), shooter.ChoosenElement.GetTransformedGeometry());
                 }
                 else
                 {
-                    drawingContext.DrawGeometry(Brushes.Azure, new Pen(Brushes.Black, 4), shooter.ChoosenElement.GetTransformedGeometry());
+                    drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 4), shooter.ChoosenElement.GetTransformedGeometry());
                 }
 
+                
 
             }
             
