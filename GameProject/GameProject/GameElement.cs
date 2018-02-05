@@ -14,6 +14,9 @@ namespace GameProject
         private Point location;
         private double height;
         private double width;
+        static Brush[] brushArray = new Brush[] { Brushes.Lime, Brushes.LightGray, Brushes.LightGoldenrodYellow, Brushes.LightYellow, Brushes.LightBlue , Brushes.WhiteSmoke, Brushes.Red, Brushes.Orange};
+        static Random rnd = new Random();
+        public Brush ElementColor { get; set; }
 
 
         public Point Location
@@ -37,6 +40,7 @@ namespace GameProject
         public GameElement()
         {
             IsClicked = false;
+            ElementColor = brushArray[rnd.Next(0, 8)];
         }
 
         public Geometry GetTransformedGeometry()

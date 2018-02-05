@@ -72,28 +72,29 @@ namespace GameProject
                 base.OnRender(drawingContext);
 
                 RectangleGeometry background = new RectangleGeometry(new Rect(0, 160, screenWidth, 110));
-                drawingContext.DrawGeometry(Brushes.LightGray, null, background);
+                drawingContext.DrawGeometry(Brushes.DarkGray, null, background);
 
+                
                 for (int i = 0; i < shooter.ObjectList.Count; i++)
                 {
                     if (shooter.ObjectList[i] is Cross)
                     {
-                        drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 25), shooter.ObjectList[i].GetTransformedGeometry());
+
+                        drawingContext.DrawGeometry(Brushes.Black, new Pen(shooter.ObjectList[i].ElementColor, 25), shooter.ObjectList[i].GetTransformedGeometry());
                     }
                     else
                     {
-                        drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 4), shooter.ObjectList[i].GetTransformedGeometry());
+                        drawingContext.DrawGeometry(shooter.ObjectList[i].ElementColor, null, shooter.ObjectList[i].GetTransformedGeometry());                        
                     }
-
 
                 }
                 if (shooter.ChoosenElement is Cross)
                 {
-                    drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 25), shooter.ChoosenElement.GetTransformedGeometry());
+                    drawingContext.DrawGeometry(Brushes.Black, new Pen(shooter.ChoosenElement.ElementColor, 25), shooter.ChoosenElement.GetTransformedGeometry());
                 }
                 else
                 {
-                    drawingContext.DrawGeometry(Brushes.LightYellow, new Pen(Brushes.Black, 4), shooter.ChoosenElement.GetTransformedGeometry());
+                    drawingContext.DrawGeometry(shooter.ChoosenElement.ElementColor, null, shooter.ChoosenElement.GetTransformedGeometry());
                 }
 
                 
